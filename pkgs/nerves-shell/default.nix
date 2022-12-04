@@ -1,7 +1,6 @@
 {pkgs, stdenv, lib, inputs, mkShell }:
 
 with pkgs;
-#with inputs.floxpkgs.inputs.nixpkgs.evalCatalog.${pkgs.system};
 mkShell {
   buildInputs = [ autoconf
     automake
@@ -15,7 +14,6 @@ mkShell {
     pkg-config
     jq 
     mix2nix  ];
-  #env = {};
   shellHook = ''
     SUDO_ASKPASS=${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass
     export MIX_TARGET="rpi0"
