@@ -34,7 +34,6 @@ defmodule HelloNerves.MixProject do
       {:shoehorn, "~> 0.9.1"},
       {:ring_logger, "~> 0.8.5"},
       {:toolshed, "~> 0.2.26"},
-      {:nerves_bootstrap, "~> 1.11"},
       # Dependencies for all targets except :host
       {:nerves_runtime, "~> 0.13.0", targets: @all_targets},
       {:nerves_pack, "~> 0.7.0", targets: @all_targets},
@@ -53,8 +52,16 @@ defmodule HelloNerves.MixProject do
       {:nerves_system_bbb, "~> 2.14", runtime: false, targets: :bbb},
       {:nerves_system_osd32mp1, "~> 0.10", runtime: false, targets: :osd32mp1},
       {:nerves_system_x86_64, "~> 1.19", runtime: false, targets: :x86_64},
-      {:nerves_system_grisp2, "~> 0.3", runtime: false, targets: :grisp2}
+      {:nerves_system_grisp2, "~> 0.3", runtime: false, targets: :grisp2},
+      {:erlport, "~> 0.10"}
     ]
+  end
+
+  defp env_or_default(key, default) do
+    case System.get_env(key) |> to_string() |> String.trim() do
+      "" -> default
+      val -> val
+    end
   end
 
   def release do
